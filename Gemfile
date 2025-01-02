@@ -52,10 +52,10 @@ group :development, :test do
 
   # use rspec for testing
   gem "rspec-rails", "~> 6.0.0"
-  gem 'factory_bot_rails'
-  gem 'simplecov', require: false
-  gem 'faker'
-  gem 'database_cleaner'
+  gem "factory_bot_rails"
+  gem "simplecov", require: false
+  gem "faker"
+  gem "database_cleaner"
 end
 
 group :development do
