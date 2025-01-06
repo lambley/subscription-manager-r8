@@ -26,7 +26,7 @@ RSpec.describe "Subscriptions", type: :request do
 
     it "should have the correct instance variable" do
       get subscriptions_path
-      expect(assigns(:subscriptions)).to eq([subscription])
+      expect(assigns(:subscriptions)).to eq([ subscription ])
     end
   end
 end
