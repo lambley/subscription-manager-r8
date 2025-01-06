@@ -1,0 +1,9 @@
+<h1>Subscriptions#index</h1>
+
+<% @subscriptions.each do |subscription| %>
+  <p><%= subscription.name %></p>
+  <p><%= subscription.price %></p>
+  <p><%= subscription.billing_frequency %></p>
+  <p><%= subscription.started_at %></p>
+  <p><%= subscription.expires_at %></p>
+<% end %>

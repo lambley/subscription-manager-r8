@@ -1,24 +1,15 @@
-# README
+# How to create users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+In `rails console`:
 
-Things you may want to cover:
+```ruby
+User.create!(email_address: "user@user.com", password: "1234", first_name: "user", last_name: "name")
+```
 
-* Ruby version
+# How to create Subscriptions data
 
-* System dependencies
+In `rails console`:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```ruby
+Subscription.create!(user: User.last, name: "test subscription", price: "9.99", billing_frequency: "monthly", started_at: "2025-01-01 00:00:00", expires_at: "2025-02-01 00:00:00")
+```
