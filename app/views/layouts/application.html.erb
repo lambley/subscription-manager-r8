@@ -24,15 +24,7 @@
   </head>
 
   <body>
-    <nav>
-      <%= link_to "Home", root_path %>
-      <%= link_to "Subscriptions", subscriptions_path %>
-      <%= button_to "Log in", new_session_path, method: :get unless authenticated? %>
-      <%= button_to "Log out", session_path, method: :delete if authenticated? %>
-    </nav>
-
-    <main>
-      <%= yield %>
-    </main>
+    <%= render 'shared/navbar' %>
+    <%= yield %>
   </body>
 </html>
