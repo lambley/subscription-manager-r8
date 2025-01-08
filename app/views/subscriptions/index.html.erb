@@ -1,9 +1,11 @@
-<h1>Subscriptions#index</h1>
+<div class="flex flex-col items-center bg-gray-100 min-h-screen py-8">
+  <h1 class="text-4xl font-bold mb-8">Your Subscriptions</h1>
 
-<% @subscriptions.each do |subscription| %>
-  <p><%= subscription.name %></p>
-  <p><%= subscription.price %></p>
-  <p><%= subscription.billing_frequency %></p>
-  <p><%= subscription.started_at %></p>
-  <p><%= subscription.expires_at %></p>
-<% end %>
+  <div class="w-11/12 md:w-9/12 grid grid-cols-1 gap-8">
+    <% @subscriptions.each do |subscription| %>
+      <div class="flex justify-center">
+        <%= render partial: 'subscription_card', locals: { subscription: subscription } %>
+      </div>
+    <% end %>
+  </div>
+</div>
