@@ -1,11 +1,30 @@
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
-
-<%= form_with url: session_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72 %><br>
-  <%= form.submit "Sign in" %>
-<% end %>
-<br>
-
-<%= link_to "Forgot password?", new_password_path %>
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden w-11/12 sm:w-9/12 md:w-7/12 lg:w-5/12 flex flex-col md:flex-row">
+    <div class="grid grid-cols-1 md:grid-cols-2">
+      <div class="bg-indigo-600 text-white p-8">
+        <h2 class="text-2xl font-bold mb-4">Welcome Back!</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.</p>
+      </div>
+      <div class="p-8">
+        <%= tag.div(flash[:alert], class: "text-red-500") if flash[:alert] %>
+        <%= tag.div(flash[:notice], class: "text-green-500") if flash[:notice] %>
+        <%= form_with url: session_path, class: "space-y-6" do |form| %>
+          <div>
+            <%= form.label :email_address, class: "block text-gray-700" %>
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+          <div>
+            <%= form.label :password, class: "block text-gray-700" %>
+            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+          <div>
+            <%= form.submit "Sign in", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          </div>
+        <% end %>
+        <div class="mt-4">
+          <%= link_to "Forgot password?", new_password_path, class: "text-indigo-600 hover:text-indigo-900" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
