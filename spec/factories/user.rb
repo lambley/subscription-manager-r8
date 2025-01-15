@@ -4,5 +4,14 @@ FactoryBot.define do
     password { 'password' }
     first_name { 'Test' }
     last_name { 'User' }
+    locale { 'us' }
+  end
+
+  trait :gb do
+    locale { "gb" }
+  end
+
+  trait :us do
+    locale { "us" }
   end
 end

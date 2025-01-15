@@ -11,9 +11,9 @@ end
 
 puts "Seeding database..."
 # create 2 test users
-user1 = User.create!(email_address: 'user@user.com', password: 'password', first_name: 'User', last_name: 'One')
+user1 = User.create!(email_address: 'user@user.com', password: 'password', first_name: 'User', last_name: 'One', locale: 'gb')
 
-user2 = User.create!(email_address: 'test@test.com', password: 'password', first_name: 'Test', last_name: 'User')
+user2 = User.create!(email_address: 'test@test.com', password: 'password', first_name: 'Test', last_name: 'User', locale: 'us')
 
 puts "#{User.count} users created"
 

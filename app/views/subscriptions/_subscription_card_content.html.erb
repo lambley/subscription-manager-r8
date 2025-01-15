@@ -2,7 +2,7 @@
   <h2 class="text-2xl font-bold mb-2"><%= subscription.name %></h2>
   <%= subscription_status(subscription) %>
 </div>
-<p class="text-gray-700 mb-2">Price: <%= subscription.price %></p>
+<p class="text-gray-700 mb-2">Price: <%= number_to_currency(subscription.price, unit: currency_symbol(subscription.user.locale)) %></p>
 <p class="text-gray-700 mb-2">Billing Frequency: <%= subscription.billing_frequency.titleize %></p>
 <p class="text-gray-700 mb-2">Started At: <%= format_date(subscription.started_at) %></p>
 <p class="text-gray-700 mb-2">Expires At: <%= format_date(subscription.expires_at) %></p>

@@ -27,6 +27,22 @@ RSpec.describe User, type: :model do
     it 'has a valid full name' do
       expect(user.full_name).to eq('Test User')
     end
+
+    context 'locale' do
+      it 'has a valid locale' do
+        expect(user.locale).to eq('us')
+      end
+
+      it 'does not allow an invalid locale' do
+        user.locale = 'invalid'
+        expect(user).to_not be_valid
+      end
+
+      it 'defaults to gb' do
+        user.locale = nil
+        expect(user).to_not be_valid
+      end
+    end
   end
 
   context 'email normalization' do

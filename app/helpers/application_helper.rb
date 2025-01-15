@@ -1,6 +1,9 @@
 module ApplicationHelper
   def format_date(date)
-    # default to YYYY-MM-DD
-    date.strftime("%Y-%m-%d")
+    if Current.user && Current.user.locale
+      date.strftime(I18n.t("date.formats.#{Current.user.locale}"))
+    else
+      date.strftime(I18n.t("date.formats.default"))
+    end
   end
 end

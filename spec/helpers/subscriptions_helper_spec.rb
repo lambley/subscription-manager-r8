@@ -1,15 +1,48 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the SubscriptionsHelper. For example:
-#
-# describe SubscriptionsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe SubscriptionsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let (:user) { create(:user) }
+  let (:subscription) { create(:subscription, user: user) }
+
+  describe '#subscription_status' do
+    it 'returns status' do
+      # default factory creates an active subscription with dynamic date ranges +- 1 month
+      expect(helper.subscription_status(subscription)).to include('Active')
+    end
+
+    context 'active' do
+      let (:subscription) { create(:subscription, user: user, expires_at: 1.month.from_now) }
+
+      it 'returns a content_tag with "Active" text' do
+        expect(helper.subscription_status(subscription)).to include('Active')
+      end
+
+      it 'returns a content_tag with the correct tailwind classes' do
+        expect(helper.subscription_status(subscription)).to include('bg-green-500 text-white px-4 py-1 rounded-full')
+      end
+    end
+
+    context 'inactive' do
+      let (:subscription) { create(:subscription, user: user, started_at: 2.month.ago, expires_at: 1.month.ago) }
+
+      it 'returns a content_tag with "Active" text' do
+        expect(helper.subscription_status(subscription)).to include('Inactive')
+      end
+
+      it 'returns a content_tag with the correct tailwind classes' do
+        expect(helper.subscription_status(subscription)).to include('bg-red-500 text-white px-4 py-1 rounded-full')
+      end
+    end
+  end
+
+  describe '#currency_symbol' do
+    it 'returns the correct currency symbol for the locale' do
+      expect(helper.currency_symbol('gb')).to eq('£')
+      expect(helper.currency_symbol('us')).to eq('$')
+    end
+
+    it 'returns the default currency symbol for an invalid locale' do
+      expect(helper.currency_symbol('invalid')).to eq('£')
+    end
+  end
 end
