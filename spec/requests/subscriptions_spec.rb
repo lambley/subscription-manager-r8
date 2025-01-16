@@ -1,32 +1,55 @@
 require 'rails_helper'
 
 RSpec.describe "Subscriptions", type: :request do
+  let(:user) { create(:user) }
+  let!(:subscription) { create(:subscription, user: user) }
+
+  before do
+    log_in(user)
+    allow(Current).to receive(:user).and_return(user)
+  end
+
+  after do
+    log_out
+  end
+
   describe "GET /index" do
-    let(:user) { create(:user) }
-    let!(:subscription) { create(:subscription, user: user) }
+    it_behaves_like 'GET request examples', :get
+  end
 
-    before do
-      log_in(user)
-      allow(Current).to receive(:user).and_return(user)
+  describe "GET /show" do
+    it_behaves_like 'GET request examples', :get
+  end
+
+  describe "GET /edit" do
+    it_behaves_like 'GET request examples', :get
+  end
+
+  describe "PATCH /update" do
+    context "with valid params" do
+      let (:updated_params) { { name: "Updated Name" } }
+
+      before do
+        patch subscription_path(subscription), params: { subscription: updated_params }
+        subscription.reload
+      end
+
+      it_behaves_like 'PATCH request examples', "Subscription was successfully updated."
     end
 
-    after do
-      log_out
-    end
+    context "with invalid params" do
+      let (:updated_params) { { name: "" } }
 
-    it "returns http success" do
-      get subscriptions_path
-      expect(response).to have_http_status(:success)
-    end
+      before do
+        patch subscription_path(subscription), params: { subscription: updated_params }
+        subscription.reload
+      end
 
-    it "should have the correct url" do
-      get subscriptions_path
-      expect(request.original_fullpath).to eq(subscriptions_path)
+      it_behaves_like 'PATCH invalid request examples'
     end
+  end
 
-    it "should have the correct instance variable" do
-      get subscriptions_path
-      expect(assigns(:subscriptions)).to eq([ subscription ])
-    end
+  describe "DELETE /destroy" do
+    it_behaves_like 'DELETE request examples', "Subscription was successfully destroyed."
   end
 end
