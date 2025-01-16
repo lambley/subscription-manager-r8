@@ -20,6 +20,12 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def destroy
+    @subscription = Current.user.subscriptions.find(params[:id])
+    @subscription.destroy
+    redirect_to subscriptions_path, notice: "Subscription was successfully destroyed."
+  end
+
   private
 
   def subscription_params

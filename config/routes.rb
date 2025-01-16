@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
 
   root "home#index"
-  resources :subscriptions, only: %i[ index show edit update]
+  resources :subscriptions
 end
