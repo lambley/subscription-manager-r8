@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: subscription_manager_development
+    ports:
+      - "5432:5432"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bundle exec rails s -b 0.0.0.0 -p 3000
+    volumes:
+      - .:/rails
+    ports:
+      - "3000:3000"
+    environment:
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      RAILS_ENV: development
+      DATABASE_URL: postgres://${DB_USERNAME}:${DB_PASSWORD}@db:5432/subscription_manager_development
+    depends_on:
+      - db
+
+volumes:
+  db_data:

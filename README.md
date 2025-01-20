@@ -1,15 +1,15 @@
-# How to create users
+# Local Development
 
-In `rails console`:
+## Rails Server
 
-```ruby
-User.create!(email_address: "user@user.com", password: "1234", first_name: "user", last_name: "name")
-```
+- Setup the database: `rails db:setup`
+- Seed the database: `rails db:seed` (optional)
+- Start the server: `rails s`
+- Start developing - runs locally on `http://localhost:3000`
 
-# How to create Subscriptions data
+## Docker-Compose
 
-In `rails console`:
-
-```ruby
-Subscription.create!(user: User.last, name: "test subscription", price: "9.99", billing_frequency: "monthly", started_at: "2025-01-01 00:00:00", expires_at: "2025-02-01 00:00:00")
-```
+- Build and start the image: `docker-compose up build`
+- Setup database: `docker-compose run web bundle exec rails db:setup` (optional)
+- Seed the database: `docker-compose run web bundle exec rails db:seed` (optional)
+- Start developing - runs locally on `http://localhost:3000`
