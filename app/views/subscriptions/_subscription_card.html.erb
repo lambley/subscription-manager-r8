@@ -1,7 +1,11 @@
 <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 md:w-9/12">
   <%= render partial: 'subscriptions/subscription_card_content', locals: { subscription: subscription, show_link: true } %>
   <div class="flex justify-end space-x-2 mt-4">
-    <%= link_to 'View Subscription', subscription_path(subscription), class: 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600' %>
-    <%= button_to 'Delete', subscription, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: 'bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600' %>
+    <%= link_to subscription_path(subscription), class: 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600' do %>
+      <i class="fa-regular fa-eye"></i>
+    <% end %>
+    <%= button_to subscription, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: 'bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600' do %>
+      <i class="fa-regular fa-trash-can"></i>
+    <% end %>
   </div>
 </div>

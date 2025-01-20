@@ -1,7 +1,11 @@
 <div class="p-6 w-11/12 md:w-8/12 mx-auto mt-8">
   <div class="flex justify-between items-center mb-4">
-    <%= link_to 'Back to Subscriptions', subscriptions_path, class: 'bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600' %>
+    <%= link_to subscriptions_path, class: 'bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600' do %>
+      <p><i class="fa-solid fa-left-long"></i> back</p>
+    <% end %>
   </div>
   <%= render partial: 'subscriptions/subscription_card_content', locals: { subscription: @subscription, show_link: false } %>
-  <%= link_to 'Edit Subscription', edit_subscription_path(@subscription), class: 'float-end bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600' %>
+  <%= link_to edit_subscription_path(@subscription), class: 'float-end bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600' do %>
+    <i class="fa-regular fa-pen-to-square"></i>
+  <% end %>
 </div>
