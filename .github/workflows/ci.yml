@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   scan_ruby:
@@ -59,8 +59,9 @@ jobs:
       db:
         image: postgres:13
         env:
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_USER: ${{ secrets.DB_USERNAME }}
+          POSTGRES_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          POSTGRES_DB: subscription_manager_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -81,10 +82,12 @@ jobs:
           chmod +x /usr/local/bin/docker-compose
 
       - name: Build and start services
-        run: docker-compose up --build -d
+        run: |
+          DB_USERNAME=${{ secrets.DB_USERNAME }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker-compose up --build -d
 
       - name: Run tests
-        run: docker-compose run --rm web bundle exec rspec || exit 1
+        run: |
+          DB_USERNAME=${{ secrets.DB_USERNAME }} DB_PASSWORD=${{ secrets.DB_PASSWORD }} docker-compose run --rm web bundle exec rspec || exit 1
 
       - name: Stop and remove services
         run: docker-compose down
