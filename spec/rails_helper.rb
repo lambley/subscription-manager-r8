@@ -29,6 +29,9 @@ RSpec.configure do |config|
     end
   end
 
+  # Allow DatabaseCleaner to work with Docker Compose setup
+  DatabaseCleaner.allow_remote_database_url = true if ENV['DATABASE_URL']&.include?('db')
+
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
   config.include FactoryBot::Syntax::Methods
