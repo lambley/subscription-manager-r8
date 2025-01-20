@@ -7,6 +7,8 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: subscription_manager_development
+    networks:
+      - default
 
   web:
     build:
@@ -24,6 +26,12 @@ services:
       DATABASE_URL: postgres://${DB_USERNAME}:${DB_PASSWORD}@db:5432/subscription_manager_development
     depends_on:
       - db
+    networks:
+      - default
 
 volumes:
   db_data:
+
+networks:
+  default:
+    driver: bridge
