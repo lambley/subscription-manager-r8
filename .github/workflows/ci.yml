@@ -72,7 +72,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build docker image
-        run: docker build up -d
+        run: docker-compose up --build -d
       - name: Run tests
         run: docker-compose run web bundle exec rspec || exit 1
       - name: Stop docker image
