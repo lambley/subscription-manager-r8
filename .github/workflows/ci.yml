@@ -59,9 +59,8 @@ jobs:
       db:
         image: postgres:13
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: subscription_manager_test
+          DB_USERNAME: $ {{ secrets.DB_USERNAME }}
+          POSTGRES_PASSWORD: $ {{ secrets.DB_PASSWORD }}
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
