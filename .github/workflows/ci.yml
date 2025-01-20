@@ -71,9 +71,23 @@ jobs:
           --health-retries 5
     steps:
       - uses: actions/checkout@v4
-      - name: Build docker image
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Install Docker Compose
+        run: |
+          curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
+
+      - name: Build and start services
         run: docker-compose up --build -d
+
       - name: Run tests
-        run: docker-compose run web bundle exec rspec || exit 1
-      - name: Stop docker image
+        run: docker-compose run --rm web bundle exec rspec || exit 1
+
+      - name: Stop and remove services
         run: docker-compose down
