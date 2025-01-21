@@ -1,10 +1,27 @@
 class SubscriptionsController < ApplicationController
   def index
-    @subscriptions = Current.user.subscriptions
+    if params[:search].present?
+      @subscriptions = Current.user.subscriptions.where('name ILIKE ?', "%#{params[:search]}%")
+    else
+      @subscriptions = Current.user.subscriptions
+    end
   end
 
   def show
     @subscription = Current.user.subscriptions.find(params[:id])
+  end
+
+  def new
+    @subscription = Current.user.subscriptions.new
+  end
+
+  def create
+    @subscription = Current.user.subscriptions.new(subscription_params)
+    if @subscription.save
+      redirect_to @subscription, notice: "Subscription was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit

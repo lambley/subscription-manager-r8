@@ -1,0 +1,32 @@
+<%= form_with model: @subscription, local: true, class: "space-y-6" do |form| %>
+  <%= render 'shared/forms/errors', object: @subscription %>
+
+  <div>
+    <%= form.label :name, class: "block text-gray-700" %>
+    <%= form.text_field :name, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+  <div>
+    <%= form.label :price, class: "block text-gray-700" %>
+    <%= form.text_field :price, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+  <div>
+    <%= form.label :billing_frequency, class: "block text-gray-700" %>
+    <%= form.select :billing_frequency, options_for_select(['monthly', 'annual'], @subscription.billing_frequency), class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+  <div>
+    <%= form.label :started_at, class: "block text-gray-700" %>
+    <%= form.date_select :started_at, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+  <div>
+    <%= form.label :expires_at, class: "block text-gray-700" %>
+    <%= form.date_select :expires_at, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+  <div class="flex justify-between border-t border-gray-200 pt-2">
+    <% if @subscription.persisted? %>
+      <%= link_to 'Cancel', subscription_path(@subscription), class: 'bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600' %>
+    <% else %>
+      <%= link_to 'Cancel', subscriptions_path, class: 'bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600' %>
+    <% end %>
+    <%= form.submit form.object.new_record? ? "Create Subscription" : "Update Subscription", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+  </div>
+<% end %>
