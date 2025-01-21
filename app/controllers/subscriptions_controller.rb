@@ -2,8 +2,15 @@ class SubscriptionsController < ApplicationController
   def index
     if params[:search].present?
       @subscriptions = Current.user.subscriptions.where('name ILIKE ?', "%#{params[:search]}%")
+    elsif params[:clear].present?
+      @subscriptions = Current.user.subscriptions
     else
       @subscriptions = Current.user.subscriptions
+    end
+
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'subscriptions_list', locals: { subscriptions: @subscriptions } }
     end
   end
 
