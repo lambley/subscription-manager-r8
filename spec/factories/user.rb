@@ -5,6 +5,7 @@ FactoryBot.define do
     first_name { 'Test' }
     last_name { 'User' }
     locale { 'us' }
+    budget { 100 }
   end
 
   trait :gb do
