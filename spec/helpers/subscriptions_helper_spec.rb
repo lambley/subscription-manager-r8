@@ -45,4 +45,9 @@ RSpec.describe SubscriptionsHelper, type: :helper do
       expect(helper.currency_symbol('invalid')).to eq('£')
     end
   end
+
+  describe '#total_cost' do
+    it_behaves_like 'total cost examples', 'monthly'
+    it_behaves_like 'total cost examples', 'annual'
+  end
 end
