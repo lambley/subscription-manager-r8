@@ -1,0 +1,14 @@
+<!-- filepath: /home/lambley/code/personal/subscription-manager-r8/app/views/users/_flash_messages.turbo_stream.erb -->
+<%= turbo_stream.replace "flash" do %>
+  <div id="flash">
+    <% if flash[:notice] %>
+      <div class="bg-green-500 text-white p-4 mb-4 rounded">
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="bg-red-500 text-white p-4 mb-4 rounded">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

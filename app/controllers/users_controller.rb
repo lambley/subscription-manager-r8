@@ -7,11 +7,9 @@ class UsersController < ApplicationController
     @user = Current.user
 
     if @user.update(budget_params)
-      render json: { budget: @user.budget }, status: :ok
-      flash[:notice] = "Budget updated successfully"
+      redirect_to subscriptions_path, status: :ok, notice: "Budget was successfully updated"
     else
-      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-      flash[:alert] = "Budget could not be updated"
+      redirect_to subscriptions_path, status: :unprocessable_entity, alert: "Budget could not be updated"
     end
   end
 

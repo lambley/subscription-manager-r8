@@ -12,26 +12,28 @@ export default class extends Controller {
 
   saveBudget() {
     const budget = this.budgetInputTarget.value;
-    // Make an AJAX request to update the budget
 
-    try {
-      fetch("/update_budget", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": document
-            .querySelector('meta[name="csrf-token"]')
-            .getAttribute("content"),
-        },
-        body: JSON.stringify({ budget }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          this.budgetDisplayTarget.innerHTML = data.budget;
+    fetch("/update_budget", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": document
+          .querySelector('meta[name="csrf-token"]')
+          .getAttribute("content"),
+        Accept: "text/html", // Expect an HTML response
+      },
+      body: JSON.stringify({ budget }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          this.budgetDisplayTarget.textContent = budget;
           this.toggleBudgetEdit();
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
+        } else {
+          console.error("Error:", response);
+        }
+      })
+      .finally(() => {
+        window.location.reload();
+      });
   }
 }
