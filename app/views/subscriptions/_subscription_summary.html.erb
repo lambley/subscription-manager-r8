@@ -14,8 +14,13 @@
           <td class="p-2 border-r border-gray-300">Monthly</td>
           <td class="p-2 border-r border-gray-300"><%= number_to_currency(total_cost(subscriptions, "monthly")) %></td>
           <td class="p-2 border-r border-gray-300 flex items-center space-x-2">
-            <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget / 12) %></span>
-            <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget / 12 %>" data-action="keydown->subscription#handleKeydown">
+            <% if Current.user.budget.present? %>
+              <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget / 12) %></span>
+              <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget / 12 %>" data-action="keydown->subscription#handleKeydown">
+            <% else %>
+              <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full text-red-500">Budget not set</span>
+              <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
+            <% end %>
             <button id="edit-monthly-budget-btn" data-subscription-target="editMonthlyButton" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600" data-action="click->subscription#toggleMonthlyBudgetEdit"><i class="fa-regular fa-pen-to-square"></i></button>
             <button id="save-monthly-budget-btn" data-subscription-target="saveMonthlyButton" class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 hidden" data-action="click->subscription#saveMonthlyBudget"><i class="fa-regular fa-floppy-disk"></i></button>
             <button id="cancel-monthly-budget-btn" data-subscription-target="cancelMonthlyButton" class="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-600 hidden" data-action="click->subscription#toggleMonthlyBudgetEdit"><i class="fa-solid fa-xmark"></i></button>
@@ -25,8 +30,13 @@
           <td class="p-2 border-r border-gray-300">Annual</td>
           <td class="p-2 border-r border-gray-300"><%= number_to_currency(total_cost(subscriptions, "annual")) %></td>
           <td class="p-2 border-r border-gray-300 flex items-center space-x-2">
-            <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget) %></span>
-            <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget %>" data-action="keydown->subscription#handleKeydown">
+            <% if Current.user.budget.present? %>
+              <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget) %></span>
+              <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget %>" data-action="keydown->subscription#handleKeydown">
+            <% else %>
+              <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full text-red-500">Budget not set</span>
+              <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
+            <% end %>
             <button id="edit-annual-budget-btn" data-subscription-target="editAnnualButton" class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600" data-action="click->subscription#toggleAnnualBudgetEdit"><i class="fa-regular fa-pen-to-square"></i></button>
             <button id="save-annual-budget-btn" data-subscription-target="saveAnnualButton" class="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 hidden" data-action="click->subscription#saveAnnualBudget"><i class="fa-regular fa-floppy-disk"></i></button>
             <button id="cancel-annual-budget-btn" data-subscription-target="cancelAnnualButton" class="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-600 hidden" data-action="click->subscription#toggleAnnualBudgetEdit"><i class="fa-solid fa-xmark"></i></button>
