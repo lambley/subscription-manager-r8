@@ -8,12 +8,9 @@
       <div class="p-8">
         <%= tag.div(flash[:alert], class: "text-red-500") if flash[:alert] %>
         <%= tag.div(flash[:notice], class: "text-green-500") if flash[:notice] %>
-        <%= render 'sessions/login' %>
+        <%= render 'registrations/sign_up' %>
         <div class="mt-4">
           <%= link_to "Forgot password?", new_password_path, class: "text-indigo-600 hover:text-indigo-900" %>
-        </div>
-        <div class="mt-2">
-          <%= link_to "Create an account", new_registration_path, class: "text-indigo-600 hover:text-indigo-900" %>
         </div>
       </div>
     </div>
