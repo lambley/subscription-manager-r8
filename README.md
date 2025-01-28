@@ -13,3 +13,8 @@
 - Setup database: `docker-compose run web bundle exec rails db:setup` (optional)
 - Seed the database: `docker-compose run web bundle exec rails db:seed` (optional)
 - Start developing - runs locally on `http://localhost:3000`
+
+# TODO
+
+- Implement these components: https://www.neobrutalism.dev/docs
+- Fix flash notices - they should not push elements down, should appear over other components, and disappear on click and after 3 seconds
