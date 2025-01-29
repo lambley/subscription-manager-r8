@@ -8,7 +8,6 @@ module ApplicationHelper
   end
 
   def flash_class(key)
-    base_class = "flash-message fixed top-4 left-1/2 transform -translate-x-1/2 px-4 py-3 rounded relative mb-4 max-w-lg shadow-lg z-50"
     case key
     when "notice"
       "#{base_class} bg-green-100 border border-green-400 text-green-700"
@@ -17,5 +16,11 @@ module ApplicationHelper
     else
       base_class
     end
+  end
+
+  private
+
+  def base_class
+    "flash-message fixed top-24 left-1/2 transform -translate-x-1/2 px-4 py-3 rounded mb-4 max-w-lg shadow-lg z-50 flex justify-between items-center"
   end
 end
