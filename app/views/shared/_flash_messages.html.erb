@@ -1,0 +1,9 @@
+<!-- filepath: /home/lambley/code/personal/subscription-manager-r8/app/views/shared/_flash_messages.html.erb -->
+<% flash.each do |key, message| %>
+  <div data-controller="flash" class="<%= flash_class(key) %>" role="alert">
+    <span class="block sm:inline"><%= message %></span>
+    <button type="button" data-action="click->flash#close" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+<% end %>
