@@ -3,17 +3,21 @@
   <%= render partial: 'subscription_summary', locals: { subscriptions: @subscriptions } %>
   <div class="w-11/12 md:w-9/12 flex justify-between mb-8">
     <%= render partial: 'shared/forms/search', locals: { search_url: subscriptions_path, object_name: 'subscriptions' } %>
-    <%= link_to new_subscription_path, class: 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600' do %>
-      <i class="fa-solid fa-plus"></i>
+    <%= render_button(
+      text: 'New',
+      icon: 'fa-solid fa-plus',
+      link: new_subscription_path,
+      button_type: 'link_to',
+      bg_class: 'bg-blue-500 text-white'
+    ) %>
+  </div>
+  <div class="w-11/12 md:w-9/12 grid grid-cols-1 gap-8" data-search-target="list">
+    <% if @subscriptions.any? %>
+      <%= render partial: 'subscriptions_list', locals: { subscriptions: @subscriptions } %>
+    <% else %>
+      <div class="text-center text-gray-500">
+        No subscriptions added yet! Click the <i class="fa-solid fa-plus"></i> sign to add Subscriptions.
+      </div>
     <% end %>
   </div>
-<div class="w-11/12 md:w-9/12 grid grid-cols-1 gap-8" data-search-target="list">
-  <% if @subscriptions.any? %>
-    <%= render partial: 'subscriptions_list', locals: { subscriptions: @subscriptions } %>
-  <% else %>
-    <div class="text-center text-gray-500">
-      No subscriptions added yet! Click the <i class="fa-solid fa-plus"></i> sign to add Subscriptions.
-    </div>
-  <% end %>
-</div>
 </div>

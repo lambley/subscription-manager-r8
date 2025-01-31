@@ -1,14 +1,25 @@
-<% button_class = "inline-flex items-center justify-center whitespace-nowrap rounded-base text-sm font-base ring-offset-white transition-all gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-text border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none dark:hover:shadow-none h-10 px-4 py-2 #{bg_class}" %>
+<% button_class = "inline-flex items-center justify-center whitespace-nowrap rounded-base text-sm font-base ring-offset-white transition-all gap-2 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-text border-2 border-border dark:border-darkBorder shadow-light dark:shadow-dark hover:translate-x-boxShadowX hover:translate-y-boxShadowY hover:shadow-none dark:hover:shadow-none h-10 px-4 py-2 #{bg_class} #{options[:class]}" %>
 
 <% if button_type == 'link_to' %>
-  <%= link_to link, class: button_class, data: data do %>
-    <% if icon %>
-      <i class="<%= icon %>"></i>
+  <% if link == '#' %>
+    <button class="<%= button_class %>" data-action="<%= data[:action] %>" <%= tag.attributes(data: {
+      "#{data[:controller]}-target": data[:target],
+    }) %> id="<%= options[:id] %>">
+      <% if icon %>
+        <i class="<%= icon %>"></i>
+      <% end %>
+      <span><%= text %></span>
+    </button>
+  <% else %>
+    <%= link_to link, class: button_class, data: data, id: options[:id] do %>
+      <% if icon %>
+        <i class="<%= icon %>"></i>
+      <% end %>
+      <span><%= text %></span>
     <% end %>
-    <span><%= text %></span>
   <% end %>
 <% elsif button_type == 'button_to' %>
-  <%= button_to link, method: method, data: data, class: button_class do %>
+  <%= button_to link, method: method, data: data, class: button_class, id: options[:id] do %>
     <% if icon %>
       <i class="<%= icon %>"></i>
     <% end %>
