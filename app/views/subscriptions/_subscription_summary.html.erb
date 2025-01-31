@@ -1,27 +1,26 @@
-<div class="w-full bg-gray-200 p-6 rounded mb-8" data-controller="subscription">
+<div class="relative w-full overflow-auto" data-controller="subscription">
   <h2 class="text-2xl font-semibold mb-4">Summary</h2>
-  <div class="overflow-x-auto">
-    <table class="min-w-full border-collapse table-auto md:table-fixed">
-      <thead>
-        <tr class="bg-gray-300">
-          <th class="text-left p-2 border-r border-gray-400 w-1/4">Type</th>
-          <th class="text-left p-2 border-r border-gray-400 w-1/4">Actual</th>
-          <th class="text-left p-2 w-1/2">Budget</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="bg-white">
-          <td class="p-2 border-r border-gray-300">Monthly</td>
-          <td class="p-2 border-r border-gray-300"><%= number_to_currency(total_cost(subscriptions, "monthly")) %></td>
-          <td class="p-2 border-r border-gray-300 flex items-center space-x-2">
-            <% if Current.user.budget.present? %>
-              <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget / 12) %></span>
-              <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget / 12 %>" data-action="keydown->subscription#handleKeydown">
-            <% else %>
-              <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full text-red-500">Budget not set</span>
-              <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
-            <% end %>
-            <%= render_button(
+  <table class="w-full caption-bottom border-border dark:border-darkBorder border-2 text-sm">
+    <thead class="[&_tr]:border-b">
+      <tr class="border-b border-border dark:border-darkBorder text-text transition-colors bg-main font-base data-[state=selected]:bg-white dark:data-[state=selected]:bg-secondaryBlack data-[state=selected]:text-text dark:data-[state=selected]:text-darkText">
+        <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">Type</th>
+        <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">Actual</th>
+        <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">Budget</th>
+      </tr>
+    </thead>
+    <tbody class="[&_tr:last-child]:border-0">
+      <tr class="border-b border-border dark:border-darkBorder text-text transition-colors bg-main font-base data-[state=selected]:bg-white dark:data-[state=selected]:bg-secondaryBlack data-[state=selected]:text-text dark:data-[state=selected]:text-darkText">
+        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">Monthly</td>
+        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base"><%= number_to_currency(total_cost(subscriptions, "monthly")) %></td>
+        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base  flex items-center space-x-2">
+          <% if Current.user.budget.present? %>
+            <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget / 12) %></span>
+            <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget / 12 %>" data-action="keydown->subscription#handleKeydown">
+          <% else %>
+            <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full text-red-500">Budget not set</span>
+            <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
+          <% end %>
+          <%= render_button(
               text: 'Edit',
               icon: 'fa-regular fa-pen-to-square',
               link: '#',
@@ -34,7 +33,7 @@
               bg_class: 'bg-blue-500 text-white',
               id: 'edit-monthly-budget',
             ) %>
-            <%= render_button(
+          <%= render_button(
               text: 'Save',
               icon: 'fa-regular fa-floppy-disk',
               link: '#',
@@ -48,7 +47,7 @@
               class: 'hidden',
               id: 'save-monthly-budget'
             ) %>
-            <%= render_button(
+          <%= render_button(
               text: 'Cancel',
               icon: 'fa-solid fa-xmark',
               link: '#',
@@ -62,20 +61,20 @@
               class: 'hidden',
               id: 'cancel-monthly-budget'
             ) %>
-          </td>
-        </tr>
-        <tr class="bg-white">
-          <td class="p-2 border-r border-gray-300">Annual</td>
-          <td class="p-2 border-r border-gray-300"><%= number_to_currency(total_cost(subscriptions, "annual")) %></td>
-          <td class="p-2 border-r border-gray-300 flex items-center space-x-2">
-            <% if Current.user.budget.present? %>
-              <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget) %></span>
-              <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget %>" data-action="keydown->subscription#handleKeydown">
-            <% else %>
-              <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full text-red-500">Budget not set</span>
-              <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
-            <% end %>
-            <%= render_button(
+        </td>
+      </tr>
+      <tr class="border-b border-border dark:border-darkBorder text-text transition-colors bg-main font-base data-[state=selected]:bg-white dark:data-[state=selected]:bg-secondaryBlack data-[state=selected]:text-text dark:data-[state=selected]:text-darkText">
+        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">Annual</td>
+        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base"><%= number_to_currency(total_cost(subscriptions, "annual")) %></td>
+        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base flex items-center space-x-2">
+          <% if Current.user.budget.present? %>
+            <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget) %></span>
+            <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget %>" data-action="keydown->subscription#handleKeydown">
+          <% else %>
+            <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full text-red-500">Budget not set</span>
+            <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
+          <% end %>
+          <%= render_button(
               text: 'Edit',
               icon: 'fa-regular fa-pen-to-square',
               link: '#',
@@ -88,7 +87,7 @@
               bg_class: 'bg-blue-500 text-white',
               id: 'edit-annual-budget',
             ) %>
-            <%= render_button(
+          <%= render_button(
               text: 'Save',
               icon: 'fa-regular fa-floppy-disk',
               link: '#',
@@ -102,7 +101,7 @@
               id: 'save-annual-budget',
               class: 'hidden'
             ) %>
-            <%= render_button(
+          <%= render_button(
               text: 'Cancel',
               icon: 'fa-solid fa-xmark',
               link: '#',
@@ -116,9 +115,8 @@
               id: 'cancel-annual-budget',
               class: 'hidden'
             ) %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
