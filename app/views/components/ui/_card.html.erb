@@ -1,4 +1,4 @@
-<div class="bg-bg p-8 rounded-base shadow-dark border-2 border-border dark:border-darkBorder">
+<div class="m1000:min-h-20 m1000:w-2/3 m1000:mx-auto m500:w-full bg-bg p-8 rounded-base shadow-dark border-2 border-border dark:border-darkBorder">
   <div class="mb-4">
     <% if title %>
       <h4 class="text-lg font-heading"><%= title %></h4>
@@ -7,5 +7,7 @@
       <p class="text-sm font-base"><%= subtitle %></p>
     <% end %>
   </div>
-  <div class="mt-5 break-words"><%= body %></div>
+  <div>
+    <%= body.html_safe %>
+  </div>
 </div>

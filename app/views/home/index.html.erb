@@ -6,18 +6,12 @@
   </div>
   <div class="container mx-auto px-4 py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <%= render_card(
-        title: "Manage Your Subscriptions",
-        subtitle: "Easier than ever",
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      )
-      %>
-      <%= render_card(
-        title: "Visualise Your Spending",
-        subtitle: nil,
-        body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-      )
-      %>
+      <%= render_card(title: "Manage Your Subscriptions", subtitle: "Easier than ever") do %>
+        <div class="mt-5 break-words">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+      <% end %>
+      <%= render_card(title: "Visualise Your Spending", subtitle: nil) do %>
+        <div class="mt-5 break-words">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+      <% end %>
     </div>
   </div>
 </div>
