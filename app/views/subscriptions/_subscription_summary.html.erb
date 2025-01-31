@@ -1,15 +1,15 @@
 <div class="relative w-full overflow-auto" data-controller="subscription">
   <h2 class="text-2xl font-semibold mb-4">Summary</h2>
-  <table class="w-full caption-bottom border-border dark:border-darkBorder border-2 text-sm">
+  <table class="w-full caption-bottom border-border border-2 text-sm">
     <thead class="[&_tr]:border-b">
-      <tr class="border-b border-border dark:border-darkBorder text-text transition-colors bg-main font-base data-[state=selected]:bg-white dark:data-[state=selected]:bg-secondaryBlack data-[state=selected]:text-text dark:data-[state=selected]:text-darkText">
+      <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
         <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">Type</th>
         <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">Actual</th>
         <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">Budget</th>
       </tr>
     </thead>
     <tbody class="[&_tr:last-child]:border-0">
-      <tr class="border-b border-border dark:border-darkBorder text-text transition-colors bg-main font-base data-[state=selected]:bg-white dark:data-[state=selected]:bg-secondaryBlack data-[state=selected]:text-text dark:data-[state=selected]:text-darkText">
+      <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">Monthly</td>
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base"><%= number_to_currency(total_cost(subscriptions, "monthly")) %></td>
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base  flex items-center space-x-2">
@@ -63,7 +63,7 @@
             ) %>
         </td>
       </tr>
-      <tr class="border-b border-border dark:border-darkBorder text-text transition-colors bg-main font-base data-[state=selected]:bg-white dark:data-[state=selected]:bg-secondaryBlack data-[state=selected]:text-text dark:data-[state=selected]:text-darkText">
+      <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">Annual</td>
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base"><%= number_to_currency(total_cost(subscriptions, "annual")) %></td>
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base flex items-center space-x-2">
