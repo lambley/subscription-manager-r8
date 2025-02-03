@@ -8,6 +8,18 @@ module Components::UiHelper
   end
 
   def render_input(name:, placeholder: nil, type: "text", value: nil, **options)
-    render partial: "components/ui/input", locals: { name: name, placeholder: placeholder, type: type, value: value, options: options }
+    render partial: "components/ui/input", locals: { name: format_label(name), placeholder: placeholder, type: type, value: value, options: options }
+  end
+
+  private
+
+  def format_label(label)
+    # if label is in the form object[field], return field,
+    # otherwise return label
+    if label.to_s.include?("[") && label.to_s.include?("]")
+      label.to_s.split("[").last.split("]").first
+    else
+      label
+    end
   end
 end

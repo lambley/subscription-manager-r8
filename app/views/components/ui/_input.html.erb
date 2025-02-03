@@ -26,9 +26,11 @@
     <%= tag.attributes(data: {
         "#{data[:controller]}-target": data[:target],
     }) if data.present? %>
-    <%= "id='#{options[:id]}'" if options[:id].present? %>
+    <%= "id=#{options[:id]}" if options[:id].present? %>
     class="<%= classes %>"
     <%= input_options.map { |k, v| "#{k}=#{v}" if v.present? }.compact.join(" ") %>
   >
 </div>
-<i class="<%=  options[:icon] %> absolute left-3 transform-translate-y-1/2"></i>
+<% if options[:icon].present? %>
+  <i class="<%=  options[:icon] %> absolute left-3 transform-translate-y-1/2"></i>
+<% end %>

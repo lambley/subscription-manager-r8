@@ -73,4 +73,41 @@ RSpec.describe Components::UiHelper, type: :helper do
       helper.render_button(text: text, button_type: button_type, bg_class: bg_class, **options)
     end
   end
+
+  describe '#render_input' do
+    it 'renders the input partial with the correct locals' do
+      name = "email_address"
+      placeholder = "Enter your email address"
+      type = "email"
+      value = "test@example.com"
+      options = { required: true, autofocus: true, autocomplete: "username", class: "extra-class" }
+
+      expect(helper).to receive(:render).with(partial: 'components/ui/input', locals: { name: name, placeholder: placeholder, type: type, value: value, options: options })
+
+      helper.render_input(name: name, placeholder: placeholder, type: type, value: value, **options)
+    end
+
+    it 'renders the input partial without a value' do
+      name = "password"
+      placeholder = "Enter your password"
+      type = "password"
+      options = { required: true, autocomplete: "current-password", maxlength: 72, class: "extra-class" }
+
+      expect(helper).to receive(:render).with(partial: 'components/ui/input', locals: { name: name, placeholder: placeholder, type: type, value: nil, options: options })
+
+      helper.render_input(name: name, placeholder: placeholder, type: type, **options)
+    end
+
+    it 'renders the input partial with correctly when given a name attribute in the form object[field]' do
+      name = "user[password]"
+      expected_name = "password"
+      placeholder = "Enter your password"
+      type = "password"
+      options = { required: true, autocomplete: "current-password", maxlength: 72, class: "extra-class" }
+
+      expect(helper).to receive(:render).with(partial: 'components/ui/input', locals: { name: expected_name, placeholder: placeholder, type: type, value: nil, options: options })
+
+      helper.render_input(name: name, placeholder: placeholder, type: type, **options)
+    end
+  end
 end
