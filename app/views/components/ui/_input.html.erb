@@ -1,0 +1,17 @@
+<% icon_classes = 'mr-4 pl-10 text-ellipsis' %>
+<% classes = "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[200px] #{icon_classes if options[:icon].present?}"  %>
+
+<% data = options[:data] %>
+
+<input
+  type="<%= type %>"
+  name="<%= name %>"
+  placeholder="<%= placeholder %>"
+  value="<%= value %>"
+  <%= tag.attributes(data: {
+      "#{data[:controller]}-target": data[:target],
+  }) %>
+  id=<%= options[:id] %>
+  class="<%= classes %>"
+>
+<i class="<%=  options[:icon] %> absolute left-3 transform-translate-y-1/2"></i>
