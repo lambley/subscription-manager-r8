@@ -1,12 +1,25 @@
 <%= form_with url: session_path, class: "space-y-6" do |form| %>
-  <div>
-    <%= form.label :email_address, class: "block text-gray-700" %>
-    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
-  </div>
-  <div>
-    <%= form.label :password, class: "block text-gray-700" %>
-    <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Enter your password", maxlength: 72, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
-  </div>
+  <%= render_input(
+    name: 'email_address',
+    type: 'email',
+    placeholder: 'Enter your email address',
+    value: params[:email_address],
+    label: true,
+    required: true,
+    autofocus: true,
+    autocomplete: 'username',
+  ) %>
+  <%= render_input(
+    name: 'password',
+    type: 'password',
+    placeholder: 'Enter your password',
+    value: params[:email_address],
+    label: true,
+    required: true,
+    autofocus: true,
+    autocomplete: 'current-password',
+    maxlength: 72,
+  ) %>
   <div>
     <%= render_button(
       text: 'Sign in',

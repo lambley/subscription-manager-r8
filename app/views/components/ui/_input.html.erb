@@ -1,17 +1,34 @@
 <% icon_classes = 'mr-4 pl-10 text-ellipsis' %>
 <% classes = "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[200px] #{icon_classes if options[:icon].present?}"  %>
+<% data = options[:data] || {} %>
 
-<% data = options[:data] %>
+<% input_options = {
+  required: options[:required],
+  autofocus: options[:autofocus],
+  autocomplete: options[:autocomplete],
+  maxlength: options[:maxlength],
+} %>
 
-<input
-  type="<%= type %>"
-  name="<%= name %>"
-  placeholder="<%= placeholder %>"
-  value="<%= value %>"
-  <%= tag.attributes(data: {
-      "#{data[:controller]}-target": data[:target],
-  }) %>
-  id=<%= options[:id] %>
-  class="<%= classes %>"
->
+<div>
+  <% if options[:label] == true %>
+    <label
+      for="<%= name %>"
+      class="block text-gray-700"
+    >
+      <%= name.to_s.humanize %>
+    </label>
+  <% end %>
+  <input
+    type="<%= type %>"
+    name="<%= name %>"
+    placeholder="<%= placeholder %>"
+    <%= "value='#{value}'" if value.present? %>
+    <%= tag.attributes(data: {
+        "#{data[:controller]}-target": data[:target],
+    }) if data.present? %>
+    <%= "id='#{options[:id]}'" if options[:id].present? %>
+    class="<%= classes %>"
+    <%= input_options.map { |k, v| "#{k}=#{v}" if v.present? }.compact.join(" ") %>
+  >
+</div>
 <i class="<%=  options[:icon] %> absolute left-3 transform-translate-y-1/2"></i>
