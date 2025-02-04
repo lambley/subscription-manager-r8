@@ -9,55 +9,29 @@
       </ul>
     </div>
   <% end %>
-  <%= render_input(
-    name: 'user[first_name]',
-    type: 'text',
-    placeholder: 'Enter your first name',
-    label: true,
-    required: true,
-    autofocus: true,
-    id: 'user_first_name',
-  ) %>
-  <%= render_input(
-    name: 'user[last_name]',
-    type: 'text',
-    placeholder: 'Enter your last name',
-    label: true,
-    required: true,
-    id: 'user_last_name',
-  ) %>
-  <%= render_input(
-    name: 'user[email_address]',
-    type: 'text',
-    placeholder: 'Enter your email address',
-    label: true,
-    required: true,
-    autocomplete: 'username',
-    id: 'user_email_address',
-  ) %>
-  <%= render_input(
-    name: 'user[password]',
-    type: 'password',
-    placeholder: 'Enter your password',
-    label: true,
-    required: true,
-    autocomplete: 'new-password',
-    maxlength: 72,
-    id: 'user_password',
-  ) %>
-  <%= render_input(
-    name: 'user[password_confirmation]',
-    type: 'password',
-    placeholder: 'Confirm your password',
-    label: true,
-    required: true,
-    autocomplete: 'new-password',
-    maxlength: 72,
-    id: 'user_password_confirmation',
-  ) %>
+  <div>
+    <%= form.label :first_name, class: "block text-gray-700" %>
+    <%= form.text_field :first_name, required: true, placeholder: "Enter your first name", class: "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full" %>
+  </div>
+  <div>
+    <%= form.label :last_name, class: "block text-gray-700" %>
+    <%= form.text_field :last_name, required: true, placeholder: "Enter your last name", class: "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full" %>
+  </div>
+  <div>
+    <%= form.label :email_address, class: "block text-gray-700" %>
+    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", class: "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full" %>
+  </div>
+  <div>
+    <%= form.label :password, class: "block text-gray-700" %>
+    <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Enter your password", maxlength: 72, class: "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full" %>
+  </div>
+  <div>
+    <%= form.label :password_confirmation, class: "block text-gray-700" %>
+    <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Confirm your password", maxlength: 72, class: "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full" %>
+  </div>
   <div>
     <%= form.label :locale, class: "block text-gray-700" %>
-    <%= form.select :locale, User.valid_locales.map { |locale| [locale.upcase, locale] }, {}, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <%= form.select :locale, User.valid_locales.map { |locale| [locale.upcase, locale] }, {}, class: "flex h-10 items-center text-text bg-orange-400 justify-between rounded-base border-2 border-border px-3 py-2 text-sm font-base ring-offset-white placeholder:text-text placeholder:opacity-50 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-full" %>
   </div>
   <div>
     <%= render_button(
