@@ -15,7 +15,7 @@
   </div>
   <div class="w-11/12 md:w-9/12 grid grid-cols-1 gap-8" data-search-target="list">
     <% if @subscriptions.any? %>
-      <%= render partial: 'subscriptions_list', locals: { subscriptions: @subscriptions } %>
+      <%= render partial: 'subscriptions_list', locals: { subscriptions: @subscriptions, show_buttons: true } %>
     <% else %>
       <div class="text-center text-gray-500">
         No subscriptions added yet! Click the <i class="fa-solid fa-plus"></i> sign to add Subscriptions.

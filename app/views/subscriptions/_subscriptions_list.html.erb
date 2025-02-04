@@ -1,5 +1,5 @@
 <% subscriptions.each do |subscription| %>
   <div>
-    <%= render partial: 'subscription_card', locals: { subscription: subscription } %>
+    <%= render partial: 'subscription_card', locals: { subscription: subscription, show_buttons: show_buttons } %>
   </div>
 <% end %>

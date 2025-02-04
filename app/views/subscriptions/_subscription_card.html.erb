@@ -7,22 +7,24 @@
     <small class="text-gray-500">Last edited: <%= format_date(subscription.updated_at) %></small>
   </div>
   <div class="flex justify-end space-x-2 mt-4">
-    <%= render_button(
-      text: 'View',
-      icon: 'fa-regular fa-eye',
-      link: subscription_path(subscription),
-      button_type: "link_to",
-      method: :get,
-      bg_class: "bg-green-500 text-white",
-    ) %>
-    <%= render_button(
-      text: 'Delete',
-      icon: 'fa-regular fa-trash-can',
-      link: subscription_path(subscription),
-      button_type: "button_to",
-      method: :delete,
-      data: { turbo_confirm: "Are you sure you want to delete this subscription?" },
-      bg_class: "bg-red-500 text-white",
+    <% unless show_buttons == false %>
+      <%= render_button(
+        text: 'View',
+        icon: 'fa-regular fa-eye',
+        link: subscription_path(subscription),
+        button_type: "link_to",
+        method: :get,
+        bg_class: "bg-green-500 text-white",
       ) %>
+      <%= render_button(
+        text: 'Delete',
+        icon: 'fa-regular fa-trash-can',
+        link: subscription_path(subscription),
+        button_type: "button_to",
+        method: :delete,
+        data: { turbo_confirm: "Are you sure you want to delete this subscription?" },
+        bg_class: "bg-red-500 text-white",
+      ) %>
+    <% end %>
   </div>
 <% end %>
