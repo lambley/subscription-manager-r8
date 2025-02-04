@@ -11,6 +11,10 @@ module Components::UiHelper
     render partial: "components/ui/input", locals: { name: format_label(name), placeholder: placeholder, type: type, value: value, options: options }
   end
 
+  def render_link(text:, url:, target:)
+    render partial: "components/ui/link", locals: { text: text, url: url, target: target }
+  end
+
   private
 
   def format_label(label)

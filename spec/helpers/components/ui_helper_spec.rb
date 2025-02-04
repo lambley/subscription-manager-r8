@@ -110,4 +110,16 @@ RSpec.describe Components::UiHelper, type: :helper do
       helper.render_input(name: name, placeholder: placeholder, type: type, **options)
     end
   end
+
+  describe '#render_link' do
+    it 'renders the link partial with the correct locals' do
+      text = "Click Me"
+      url = "/path"
+      target = "_blank"
+
+      expect(helper).to receive(:render).with(partial: 'components/ui/link', locals: { text: text, url: url, target: target })
+
+      helper.render_link(text: text, url: url, target: target)
+    end
+  end
 end
