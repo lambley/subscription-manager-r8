@@ -40,5 +40,23 @@ RSpec.describe "Registrations", type: :request do
         expect(assigns(:user).errors.full_messages).to include("Email address has already been taken")
       end
     end
+
+    context "on rescue" do
+      let(:user) { build(:user) }
+
+      it "returns http unprocessable entity" do
+        allow_any_instance_of(User).to receive(:save).and_raise(ActiveRecord::RecordNotUnique)
+        post registration_path, params: { user: { first_name: user.first_name, last_name: user.last_name, locale: user.locale, email_address: user.email_address, password: user.password, password_confirmation: user.password_confirmation } }
+
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it "returns an error message" do
+        allow_any_instance_of(User).to receive(:save).and_raise(ActiveRecord::RecordNotUnique)
+        post registration_path, params: { user: { first_name: user.first_name, last_name: user.last_name, locale: user.locale, email_address: user.email_address, password: user.password, password_confirmation: user.password_confirmation } }
+
+        expect(assigns(:user).errors.full_messages).to include("Email address has already been taken")
+      end
+    end
   end
 end
