@@ -22,7 +22,7 @@
     type="<%= type %>"
     name="<%= name %>"
     placeholder="<%= placeholder %>"
-    <%= "value='#{value}'" if value.present? %>
+    <%= "value=#{value}" if value.present? %>
     <%= tag.attributes(data: {
         "#{data[:controller]}-target": data[:target],
     }) if data.present? %>

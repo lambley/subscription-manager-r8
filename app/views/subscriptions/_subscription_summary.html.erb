@@ -15,10 +15,30 @@
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base  flex items-center space-x-2">
           <% if Current.user.budget.present? %>
             <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget / 12) %></span>
-            <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget / 12 %>" data-action="keydown->subscription#handleKeydown">
+            <%= render_input(
+                name: 'monthly_budget',
+                value: (Current.user.budget / 12).round(2),
+                data: {
+                  controller: 'subscription',
+                  target: 'monthlyBudgetInput',
+                  action: 'keydown->subscription#handleKeydown'
+                },
+                id: 'monthly-budget-input',
+                class: 'hidden',
+            ) %>
           <% else %>
             <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full text-red-500">Budget not set</span>
-            <input type="text" id="monthly-budget-input" data-subscription-target="monthlyBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
+            <%= render_input(
+                name: 'monthly_budget',
+                data: {
+                  controller: 'subscription',
+                  target: 'monthlyBudgetInput',
+                  action: 'keydown->subscription#handleKeydown'
+                },
+                id: 'monthly-budget-input',
+                class: 'hidden',
+                placeholder: 'Set your budget'
+            ) %>
           <% end %>
           <%= render_button(
               text: 'Edit',
@@ -69,10 +89,30 @@
         <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base flex items-center space-x-2">
           <% if Current.user.budget.present? %>
             <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full"><%= number_to_currency(Current.user.budget) %></span>
-            <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" value="<%= Current.user.budget %>" data-action="keydown->subscription#handleKeydown">
+            <%= render_input(
+                name: 'annual_budget',
+                value: Current.user.budget,
+                data: {
+                  controller: 'subscription',
+                  target: 'annualBudgetInput',
+                  action: 'keydown->subscription#handleKeydown'
+                },
+                id: 'annual-budget-input',
+                class: 'hidden',
+            ) %>
           <% else %>
             <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full text-red-500">Budget not set</span>
-            <input type="text" id="annual-budget-input" data-subscription-target="annualBudgetInput" class="border rounded p-2 hidden w-full" placeholder="Set your budget" data-action="keydown->subscription#handleKeydown">
+            <%= render_input(
+                name: 'annual_budget',
+                data: {
+                  controller: 'subscription',
+                  target: 'annualBudgetInput',
+                  action: 'keydown->subscription#handleKeydown'
+                },
+                id: 'annual-budget-input',
+                class: 'hidden',
+                placeholder: 'Set your budget'
+            ) %>
           <% end %>
           <%= render_button(
               text: 'Edit',
