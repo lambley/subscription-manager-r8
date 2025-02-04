@@ -3,7 +3,8 @@ class Subscription < ApplicationRecord
 
   validates :name, presence: true
   validates :price, numericality: { greater_than_or_equal_to: 0 }
-  validates :billing_frequency, inclusion: { in: %w[monthly annual] }
+  validate :billing_frequency_case_insensitive_inclusion
+
 
   # Date validations
   validate :started_at_not_nil
@@ -16,6 +17,13 @@ class Subscription < ApplicationRecord
   end
 
   private
+
+  def billing_frequency_case_insensitive_inclusion
+    valid_frequencies = %w[monthly annual]
+    unless valid_frequencies.include?(billing_frequency.to_s.downcase)
+      errors.add(:billing_frequency, :inclusion, message: "is not included in the list")
+    end
+  end
 
   # start date or expire date are optional but cannot be nil
   def started_at_not_nil

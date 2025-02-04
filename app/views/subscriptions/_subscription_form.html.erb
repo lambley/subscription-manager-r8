@@ -3,30 +3,48 @@
 
   <div>
     <%= form.label :name, class: "block text-gray-700" %>
-    <%= form.text_field :name, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <%= form.text_field :name, class: "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full" %>
   </div>
   <div>
     <%= form.label :price, class: "block text-gray-700" %>
-    <%= form.text_field :price, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <%= form.number_field :price, step: 0.01, class: "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full" %>
   </div>
   <div>
     <%= form.label :billing_frequency, class: "block text-gray-700" %>
-    <%= form.select :billing_frequency, options_for_select(['monthly', 'annual'], @subscription.billing_frequency), class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <%= form.select :billing_frequency, options_for_select(['Monthly', 'Annual'], @subscription.billing_frequency), {}, class: "flex h-10 items-center text-text bg-main justify-between rounded-base border-2 border-border px-3 py-2 text-sm font-base ring-offset-white placeholder:text-text placeholder:opacity-50 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 w-full" %>
   </div>
   <div>
     <%= form.label :started_at, class: "block text-gray-700" %>
-    <%= form.date_select :started_at, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <div class="flex gap-4">
+      <%= form.date_select :started_at, {prompt: { day: 'DD', month: 'MM', year: 'YYYY' }}, class: "flex-1 h-10 items-center text-text bg-main justify-between rounded-base border-2 border-border px-3 py-2 text-sm font-base ring-offset-white placeholder:text-text placeholder:opacity-50 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1" %>
+    </div>
   </div>
   <div>
     <%= form.label :expires_at, class: "block text-gray-700" %>
-    <%= form.date_select :expires_at, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    <div class="flex gap-4">
+      <%= form.date_select :expires_at, {prompt: { day: 'DD', month: 'MM', year: 'YYYY' }}, class: "flex-1 h-10 items-center text-text bg-main justify-between rounded-base border-2 border-border px-3 py-2 text-sm font-base ring-offset-white placeholder:text-text placeholder:opacity-50 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1" %>
+    </div>
   </div>
   <div class="flex justify-between border-t border-gray-200 pt-2">
     <% if @subscription.persisted? %>
-      <%= link_to 'Cancel', subscription_path(@subscription), class: 'bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600' %>
+      <%= render_button(
+        text: "Cancel",
+        button_type: "link_to",
+        link: subscription_path(@subscription),
+        bg_class: "bg-gray-500 text-white hover:bg-gray-600"
+      ) %>
     <% else %>
-      <%= link_to 'Cancel', subscriptions_path, class: 'bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600' %>
+      <%= render_button(
+        text: "Cancel",
+        button_type: "link_to",
+        link: subscriptions_path,
+        bg_class: "bg-gray-500 text-white hover:bg-gray-600"
+      ) %>
     <% end %>
-    <%= form.submit form.object.new_record? ? "Create Subscription" : "Update Subscription", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+    <%= render_button(
+      text: form.object.new_record? ? "Create Subscription" : "Update Subscription",
+      button_type: "submit",
+      bg_class: "bg-green-500 text-white hover:bg-green-600"
+    ) %>
   </div>
 <% end %>

@@ -1,5 +1,5 @@
 <% icon_classes = 'mr-4 pl-10 text-ellipsis' %>
-<% classes = "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[200px] #{icon_classes if options[:icon].present?}"  %>
+<% classes = "flex h-10 rounded-base border-2 text-text font-base selection:bg-main selection:text-text border-border bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[200px] #{icon_classes if options[:icon].present?} #{options[:class]}"%>
 <% data = options[:data] || {} %>
 
 <% input_options = {

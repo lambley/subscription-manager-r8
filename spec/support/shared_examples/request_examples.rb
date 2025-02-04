@@ -1,3 +1,5 @@
+# TODO: Refactor the shared examples to be reusable across multiple request specs
+
 RSpec.shared_examples 'GET request examples' do
   it "returns http success" do
     send(:get, subscription_path(subscription))

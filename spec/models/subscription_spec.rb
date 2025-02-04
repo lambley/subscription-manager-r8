@@ -41,14 +41,21 @@ RSpec.describe Subscription, type: :model do
       expect(subscription).to_not be_valid
     end
 
-    it 'is not valid without a billing frequency' do
-      subscription.billing_frequency = nil
-      expect(subscription).to_not be_valid
-    end
+    context 'billing frequency' do
+      it 'is not valid without a billing frequency' do
+        subscription.billing_frequency = nil
+        expect(subscription).to_not be_valid
+      end
 
-    it 'is not valid with an invalid billing frequency' do
-      subscription.billing_frequency = 'invalid'
-      expect(subscription).to_not be_valid
+      it 'is not valid with an invalid billing frequency' do
+        subscription.billing_frequency = 'invalid'
+        expect(subscription).to_not be_valid
+      end
+
+      it 'is case insensitive' do
+        subscription.billing_frequency = 'MONTHLY'
+        expect(subscription).to be_valid
+      end
     end
 
     it 'is valid with a valid started at date' do
