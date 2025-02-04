@@ -1,9 +1,21 @@
 <div class="flex flex-col items-center min-h-screen">
-  <div class="w-full bg-blue-500 text-white py-32">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold text-center">Manage your Subscriptions</h1>
+  <main class="relative flex min-h-[100svh] flex-col items-center justify-center bg-bg px-5 py-[200px] font-bold w-full">
+    <div class="container mx-auto px-4 text-center m1100:w-4/5 m1000:w-full">
+      <h1 class="text-5xl font-heading m1400:text-4xl m800:text-3xl m500:text-2xl m400:text-xl">
+        Manage your Subscriptions
+      </h1>
+      <p class="text-xl font-base mt-4 m1400:text-lg m800:text-base m500:text-sm m400:text-xs">
+        Keep track of your spending and manage your subscriptions with ease.
+      </p>
     </div>
-  </div>
+    <%= render_button(
+      text: "Find Out More",
+      link: "about",
+      button_type: "link_to",
+      bg_class: "bg-blue-500 text-white mt-8",
+      icon: "fa-solid fa-arrow-right",
+    ) %>
+  </main>
   <div class="container mx-auto px-4 py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <%= render_card(title: "Manage Your Subscriptions", subtitle: "Easier than ever") do %>
