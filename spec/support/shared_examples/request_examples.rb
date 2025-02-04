@@ -15,6 +15,35 @@ RSpec.shared_examples 'GET request examples' do
   end
 end
 
+RSpec.shared_examples 'POST request examples' do |message|
+  it "should create a new record" do
+    send(:post, subscriptions_path, params: { subscription: valid_params })
+    expect(Subscription.find_by(name: valid_params[:name])).to be_present
+  end
+
+  it "should redirect to the correct path" do
+    send(:post, subscriptions_path, params: { subscription: valid_params })
+    expect(response).to redirect_to(Subscription.last)
+  end
+
+  it "should display the correct flash message" do
+    send(:post, subscriptions_path, params: { subscription: valid_params })
+    expect(flash[:notice]).to eq(message)
+  end
+end
+
+RSpec.shared_examples 'POST invalid request examples' do
+  it "should not create a new record" do
+    send(:post, subscriptions_path, params: { subscription: invalid_params })
+    expect(Subscription.find_by(name: invalid_params[:name])).to be_nil
+  end
+
+  it("should render the new template") do
+    send(:post, subscriptions_path, params: { subscription: invalid_params })
+    expect(response).to render_template(:new)
+  end
+end
+
 RSpec.shared_examples 'PATCH request examples' do |message|
   it "should update the record" do
     expect(subscription.name).to eq(updated_params[:name])

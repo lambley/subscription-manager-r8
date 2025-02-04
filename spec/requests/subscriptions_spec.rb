@@ -15,14 +15,61 @@ RSpec.describe "Subscriptions", type: :request do
 
   describe "GET /index" do
     it_behaves_like 'GET request examples', :get
+
+    context 'with search param' do
+      let!(:subscription2) { create(:subscription, user: user, name: "Another Name") }
+
+      before do
+        get subscriptions_path, params: { search: "Another" }
+      end
+
+      it 'returns only the subscription with the searched name' do
+        expect(response.body).to include(subscription2.name)
+        expect(response.body).not_to include(subscription.name)
+      end
+
+      it 'returns all subscriptions when search param is empty' do
+        get subscriptions_path, params: { search: "" }
+        expect(response.body).to include(subscription.name)
+        expect(response.body).to include(subscription2.name)
+      end
+    end
   end
 
   describe "GET /show" do
     it_behaves_like 'GET request examples', :get
   end
 
+  describe "GET /new" do
+    it_behaves_like 'GET request examples', :get
+
+    it 'returns a new subscription object' do
+      get new_subscription_path
+      expect(assigns(:subscription)).to be_a_new(Subscription)
+    end
+  end
+
+  describe "POST /create" do
+    context "with valid params" do
+      let (:valid_params) { attributes_for(:subscription) }
+
+      it_behaves_like 'POST request examples', "Subscription was successfully created."
+    end
+
+    context "with invalid params" do
+      let (:invalid_params) { { name: "" } }
+
+      it_behaves_like 'POST invalid request examples'
+    end
+  end
+
   describe "GET /edit" do
     it_behaves_like 'GET request examples', :get
+
+    it 'returns the correct subscription object' do
+      get edit_subscription_path(subscription)
+      expect(assigns(:subscription)).to eq(subscription)
+    end
   end
 
   describe "PATCH /update" do
