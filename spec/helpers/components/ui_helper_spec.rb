@@ -122,4 +122,16 @@ RSpec.describe Components::UiHelper, type: :helper do
       helper.render_link(text: text, url: url, target: target)
     end
   end
+
+  describe '#render_badge' do
+    it 'renders the badge partial with the correct locals' do
+      text = "New"
+      bg_class = "bg-blue-500"
+      text_class = "text-white"
+
+      expect(helper).to receive(:render).with(partial: 'components/ui/badge', locals: { text: text, bg_class: bg_class, text_class: text_class })
+
+      helper.render_badge(text: text, bg_class: bg_class, text_class: text_class)
+    end
+  end
 end

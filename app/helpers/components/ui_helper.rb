@@ -15,6 +15,10 @@ module Components::UiHelper
     render partial: "components/ui/link", locals: { text: text, url: url, target: target }
   end
 
+  def render_badge(text:, bg_class: "bg-main", text_class: "text-white")
+    render partial: "components/ui/badge", locals: { text: text, bg_class: bg_class, text_class: text_class }
+  end
+
   private
 
   def format_label(label)

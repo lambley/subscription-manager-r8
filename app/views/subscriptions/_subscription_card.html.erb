@@ -1,4 +1,9 @@
 <%= render_card(title: subscription.name, subtitle: nil) do %>
+  <%= render_badge(
+    text: subscription.active? ? 'Active' : 'Inactive',
+    bg_class: subscription.active? ? 'bg-main' : 'bg-gray-500',
+    text_class: subscription.active? ? 'text-black' : 'text-white',
+  ) %>
   <p class="text-gray-700 mb-2">Price: <%= number_to_currency(subscription.price, unit: currency_symbol(subscription.user.locale)) %></p>
   <p class="text-gray-700 mb-2">Billing Frequency: <%= subscription.billing_frequency.titleize %></p>
   <p class="text-gray-700 mb-2">Started At: <%= format_date(subscription.started_at) %></p>
