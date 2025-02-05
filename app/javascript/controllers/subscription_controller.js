@@ -4,20 +4,30 @@ export default class extends Controller {
   static targets = [
     "monthlyBudgetDisplay",
     "monthlyBudgetInput",
+    "monthlyBudgetCurrencySymbol",
     "annualBudgetDisplay",
     "annualBudgetInput",
+    "annualBudgetCurrencySymbol",
     "editMonthlyButton",
     "saveMonthlyButton",
     "cancelMonthlyButton",
     "editAnnualButton",
     "saveAnnualButton",
     "cancelAnnualButton",
+    "summaryText",
+    "monthlyActualValue",
   ];
+
+  connect() {
+    console.log("Connected to subscription controller");
+    this.assessBudget();
+  }
 
   toggleMonthlyBudgetEdit() {
     // toggle the monthly budget display and input
     this.monthlyBudgetDisplayTarget.classList.toggle("hidden");
     this.monthlyBudgetInputTarget.classList.toggle("hidden");
+    this.monthlyBudgetCurrencySymbolTarget.classList.toggle("hidden");
 
     // disable the other edit button while editing
     this.toggleDisable(this.editAnnualButtonTarget);
@@ -32,6 +42,7 @@ export default class extends Controller {
     // toggle the annual budget display and input
     this.annualBudgetDisplayTarget.classList.toggle("hidden");
     this.annualBudgetInputTarget.classList.toggle("hidden");
+    this.annualBudgetCurrencySymbolTarget.classList.toggle("hidden");
 
     // disable the other edit button while editing
     this.toggleDisable(this.editMonthlyButtonTarget);
@@ -55,6 +66,34 @@ export default class extends Controller {
       } else if (event.target === this.annualBudgetInputTarget) {
         this.saveAnnualBudget();
       }
+    }
+  }
+
+  assessBudget() {
+    // only need to compare monthly, as annual is derived from monthly
+    const monthlyBudgetValue = parseFloat(
+      this.monthlyBudgetDisplayTarget.textContent
+    );
+    const monthlyActualValue = parseFloat(
+      this.monthlyActualValueTarget.textContent
+    );
+
+    console.log("Monthly budget:", monthlyBudgetValue);
+    console.log("Monthly actual:", monthlyActualValue);
+
+    if (isNaN(monthlyBudgetValue) || isNaN(monthlyActualValue)) {
+      this.summaryTextTarget.textContent = "Please enter a valid budget";
+    } else if (monthlyActualValue > monthlyBudgetValue) {
+      this.summaryTextTarget.textContent = "You are over budget!";
+      this.summaryTextTarget.classList.add("bg-red-600");
+    } else if (monthlyActualValue < monthlyBudgetValue) {
+      this.summaryTextTarget.textContent = "You are under budget!";
+      this.summaryTextTarget.classList.add("bg-green-600");
+    } else if (monthlyActualValue === monthlyBudgetValue) {
+      this.summaryTextTarget.textContent = "You are on budget!";
+      this.summaryTextTarget.classList.add("bg-green-600");
+    } else {
+      this.summaryTextTarget.textContent = "There was an issue reading the budget";
     }
   }
 
@@ -103,6 +142,7 @@ export default class extends Controller {
       })
       .finally(() => {
         window.location.reload();
+        this.assessBudget();
       });
   }
 }
