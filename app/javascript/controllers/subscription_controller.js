@@ -19,7 +19,6 @@ export default class extends Controller {
   ];
 
   connect() {
-    console.log("Connected to subscription controller");
     this.assessBudget();
   }
 
@@ -77,9 +76,6 @@ export default class extends Controller {
     const monthlyActualValue = parseFloat(
       this.monthlyActualValueTarget.textContent
     );
-
-    console.log("Monthly budget:", monthlyBudgetValue);
-    console.log("Monthly actual:", monthlyActualValue);
 
     if (isNaN(monthlyBudgetValue) || isNaN(monthlyActualValue)) {
       this.summaryTextTarget.textContent = "Please enter a valid budget";
