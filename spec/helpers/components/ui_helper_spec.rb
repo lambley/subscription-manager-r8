@@ -68,7 +68,7 @@ RSpec.describe Components::UiHelper, type: :helper do
       bg_class = "bg-red-500"
       options = { class: "extra-class" }
 
-      expect(helper).to receive(:render).with(partial: 'components/ui/button', locals: { text: text, icon: nil, link: "#", button_type: button_type, method: nil, data: nil, bg_class: bg_class, options: options })
+      expect(helper).to receive(:render).with(partial: 'components/ui/button', locals: { text: text, icon: nil, link: "#", button_type: button_type, method: nil, data: {}, bg_class: bg_class, options: options })
 
       helper.render_button(text: text, button_type: button_type, bg_class: bg_class, **options)
     end
@@ -132,6 +132,38 @@ RSpec.describe Components::UiHelper, type: :helper do
       expect(helper).to receive(:render).with(partial: 'components/ui/badge', locals: { text: text, bg_class: bg_class, text_class: text_class })
 
       helper.render_badge(text: text, bg_class: bg_class, text_class: text_class)
+    end
+  end
+
+  describe '#collapsible_preview' do
+    it 'captures the block content and sets it to the :preview content_for' do
+      content = "Test Content"
+
+      expect(helper).to receive(:content_for).with(:preview, content)
+
+      helper.collapsible_preview { content }
+    end
+  end
+
+  describe '#collapsible_body' do
+    it 'captures the block content and sets it to the :body content_for' do
+      content = "Test Content"
+
+      expect(helper).to receive(:content_for).with(:body, content)
+
+      helper.collapsible_body { content }
+    end
+  end
+
+  describe '#render_collapsible' do
+    it 'captures the block content and renders the collapsible partial with the correct locals' do
+      content = "Test Content"
+      options = { title: "Test Title", bg_class: "bg-blue-500", text_class: "text-white" }
+
+      expect(helper).to receive(:capture).and_return(content)
+      expect(helper).to receive(:render).with('components/ui/collapsible', content: content, **options)
+
+      helper.render_collapsible(**options) { content }
     end
   end
 end

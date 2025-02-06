@@ -1,0 +1,18 @@
+<div
+  class="space-y-2"
+  data-controller="collapsible">
+  <div
+    class="float-end px-4 mb-4"
+    data-action="click->collapsible#toggle">
+    <%= render_button(
+      text: "",
+      icon: "fa-solid fa-arrows-up-down",
+    ) %>
+  </div>
+  <%= yield :preview %>
+  <div
+    data-collapsible-target="item"
+    class="space-y-2">
+    <%= yield :body %>
+  </div>
+</div>

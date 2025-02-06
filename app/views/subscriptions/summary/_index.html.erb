@@ -1,9 +1,15 @@
 <div class="relative w-full overflow-auto" data-controller="subscription">
-  <h2 class="text-2xl font-semibold mb-4">Summary</h2>
-  <%= render_subscription_summary_table(
-    subscriptions: subscriptions,
-    budget: Current.user.budget,
-    locale: Current.user.locale
-  ) %>
-  <p data-subscription-target="summaryText" class="mt-4 m1000:min-h-20 m1000:w-2/3 m1000:mx-auto m500:w-full text-white text-center p-8 rounded-base border-2 border-border"></p>
+  <%= render_collapsible do %>
+    <% collapsible_preview do %>
+      <h2 class="text-2xl font-semibold mb-4">Summary</h2>
+    <% end %>
+
+    <% collapsible_body do %>
+      <%= render_subscription_summary_table(
+        subscriptions: subscriptions,
+        budget: Current.user.budget,
+        locale: Current.user.locale
+      ) %>
+    <% end %>
+  <% end %>
 </div>
