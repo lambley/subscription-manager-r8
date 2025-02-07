@@ -155,6 +155,16 @@ RSpec.describe Components::UiHelper, type: :helper do
     end
   end
 
+  describe '#collapsed_element' do
+    it 'captures the block content and sets it to the :collapsed_element content_for' do
+      content = "Test Content"
+
+      expect(helper).to receive(:content_for).with(:collapsed_element, content)
+
+      helper.collapsed_element { content }
+    end
+  end
+
   describe '#render_collapsible' do
     it 'captures the block content and renders the collapsible partial with the correct locals' do
       content = "Test Content"

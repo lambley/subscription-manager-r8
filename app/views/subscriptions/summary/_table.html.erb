@@ -1,41 +1,41 @@
-  <table class="w-full caption-bottom border-border border-2 text-sm">
-    <thead class="[&_tr]:border-b">
-      <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
-        <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
-          Type
-        </th>
-        <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
-          Actual
-        </th>
-        <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
-          Budget
-        </th>
-        <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
-          Actions
-        </th>
-      </tr>
-    </thead>
-    <tbody class="[&_tr:last-child]:border-0">
-      <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
-          Monthly
-        </td>
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
-          <%= currency_symbol %>
-          <span data-subscription-target="monthlyActualValue">
-            <%= monthly_actual %>
-          </span>
-        </td>
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
-          <span data-subscription-target="monthlyBudgetCurrencySymbol">
-            <%=
+<table class="w-full caption-bottom border-border border-2 text-sm">
+  <thead class="[&_tr]:border-b">
+    <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
+      <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
+        Type
+      </th>
+      <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
+        Actual
+      </th>
+      <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
+        Budget
+      </th>
+      <th class="h-12 px-4 text-left align-middle font-heading text-text [&:has([role=checkbox])]:pr-0 w-[100px]">
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody class="[&_tr:last-child]:border-0">
+    <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
+        Monthly
+      </td>
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
+        <%= currency_symbol %>
+        <span data-subscription-target="monthlyActualValue">
+          <%= monthly_actual %>
+        </span>
+      </td>
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
+        <span data-subscription-target="monthlyBudgetCurrencySymbol">
+          <%=
               currency_symbol if budget_set
             %>
-          </span>
-          <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full <%= 'text-red-600' unless budget_set %>">
-            <%= monthly_budget %>
-          </span>
-          <%= render_input(
+        </span>
+        <span id="monthly-budget-display" data-subscription-target="monthlyBudgetDisplay" class="w-full <%= 'text-red-600' unless budget_set %>">
+          <%= monthly_budget %>
+        </span>
+        <%= render_input(
               name: 'monthly_budget',
               value: monthly_budget,
               data: {
@@ -47,9 +47,9 @@
               class: 'hidden',
               width: '[100px]'
           ) %>
-        </td>
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base flex items-center justify-start space-x-2">
-          <%= render_button(
+      </td>
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base flex items-center justify-start space-x-2">
+        <%= render_button(
               text: 'Edit',
               icon: 'fa-regular fa-pen-to-square',
               link: '#',
@@ -62,7 +62,7 @@
               bg_class: 'bg-blue-500 text-white',
               id: 'edit-monthly-budget',
             ) %>
-          <%= render_button(
+        <%= render_button(
               text: 'Save',
               icon: 'fa-regular fa-floppy-disk',
               link: '#',
@@ -76,7 +76,7 @@
               class: 'hidden',
               id: 'save-monthly-budget'
             ) %>
-          <%= render_button(
+        <%= render_button(
               text: 'Cancel',
               icon: 'fa-solid fa-xmark',
               link: '#',
@@ -90,28 +90,28 @@
               class: 'hidden',
               id: 'cancel-monthly-budget'
             ) %>
-        </td>
-      </tr>
-      <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
-          Annual
-        </td>
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
-          <%= currency_symbol %>
-          <span>
-            <%= annual_actual %>
-          </span>
-        </td>
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
-          <span data-subscription-target="annualBudgetCurrencySymbol">
-            <%=
+      </td>
+    </tr>
+    <tr class="border-b border-border text-text transition-colors bg-main font-base data-[state=selected]:bg-white data-[state=selected]:text-text">
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
+        Annual
+      </td>
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
+        <%= currency_symbol %>
+        <span>
+          <%= annual_actual %>
+        </span>
+      </td>
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base">
+        <span data-subscription-target="annualBudgetCurrencySymbol">
+          <%=
               currency_symbol if budget_set
             %>
-          </span>
-          <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full <%= 'text-red-600' unless budget_set %>">
-            <%= annual_budget %>
-          </span>
-          <%= render_input(
+        </span>
+        <span id="annual-budget-display" data-subscription-target="annualBudgetDisplay" class="w-full <%= 'text-red-600' unless budget_set %>">
+          <%= annual_budget %>
+        </span>
+        <%= render_input(
               name: 'annual_budget',
               value: annual_budget,
               data: {
@@ -123,9 +123,9 @@
               class: 'hidden',
               width: '[100px]'
           ) %>
-        </td>
-        <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base flex items-center justify-start space-x-2">
-          <%= render_button(
+      </td>
+      <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0 font-base flex items-center justify-start space-x-2">
+        <%= render_button(
               text: 'Edit',
               icon: 'fa-regular fa-pen-to-square',
               link: '#',
@@ -138,7 +138,7 @@
               bg_class: 'bg-blue-500 text-white',
               id: 'edit-annual-budget',
             ) %>
-          <%= render_button(
+        <%= render_button(
               text: 'Save',
               icon: 'fa-regular fa-floppy-disk',
               link: '#',
@@ -152,7 +152,7 @@
               id: 'save-annual-budget',
               class: 'hidden'
             ) %>
-          <%= render_button(
+        <%= render_button(
               text: 'Cancel',
               icon: 'fa-solid fa-xmark',
               link: '#',
@@ -166,8 +166,8 @@
               id: 'cancel-annual-budget',
               class: 'hidden'
             ) %>
-        </td>
-      </tr>
-    </tbody>
-    <caption data-subscription-target="summaryText" class="mt-4 m1000:min-h-20 w-full text-white text-center p-8 rounded-base border-2 border-border"></caption>
-  </table>
+      </td>
+    </tr>
+  </tbody>
+  <caption data-subscription-target="summaryText" class="mt-4 m1000:min-h-20 w-full text-white text-center p-8 rounded-base border-2 border-border"></caption>
+</table>

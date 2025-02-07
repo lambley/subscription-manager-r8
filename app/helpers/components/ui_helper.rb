@@ -27,6 +27,10 @@ module Components::UiHelper
     content_for :body, capture(&block) if block
   end
 
+  def collapsed_element(**options, &block)
+    content_for :collapsed_element, capture(&block) if block
+  end
+
   def render_collapsible(**options, &block)
     content = capture(&block) if block
     render "components/ui/collapsible", content: content, **options

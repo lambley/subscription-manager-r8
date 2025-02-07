@@ -11,5 +11,9 @@
         locale: Current.user.locale
       ) %>
     <% end %>
+
+    <% collapsed_element do %>
+      <%= render partial: 'subscriptions/summary/table_skeleton' %>
+    <% end %>
   <% end %>
 </div>
