@@ -35,4 +35,12 @@ module SubscriptionsHelper
       currency_symbol: currency_symbol
     }
   end
+
+  def formatted_subscription_name(name)
+    name.titleize
+  end
+
+  def formatted_subscription_names
+    Subscription.subscription_names.map { |name| [ formatted_subscription_name(name), name ] }
+  end
 end

@@ -1,12 +1,15 @@
 class Subscription < ApplicationRecord
   belongs_to :user
 
-  validates :name, presence: true
+  VALID_BILLING_FREQUENCIES = %w[monthly annual].freeze
+  SUBSCRIPTION_NAMES = %w[
+    netflix amazon_prime_video disney_plus hbo_max hulu apple_tv_plus peacock paramount_plus discovery_plus youtube_premium cruncyroll starz showtime britbox acorn_tv amc_plus mubi sling_tv fubo_tv philo
+  ].freeze
+
+  validates :name, presence: true, inclusion: { in: SUBSCRIPTION_NAMES }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
   validate :billing_frequency_case_insensitive_inclusion
 
-
-  # Date validations
   validate :started_at_not_nil
   validate :expires_at_not_nil
   validate :started_at_before_expires_at
@@ -16,11 +19,14 @@ class Subscription < ApplicationRecord
     Time.current <= expires_at
   end
 
+  def self.subscription_names
+    SUBSCRIPTION_NAMES
+  end
+
   private
 
   def billing_frequency_case_insensitive_inclusion
-    valid_frequencies = %w[monthly annual]
-    unless valid_frequencies.include?(billing_frequency.to_s.downcase)
+    unless VALID_BILLING_FREQUENCIES.include?(billing_frequency.to_s.downcase)
       errors.add(:billing_frequency, :inclusion, message: "is not included in the list")
     end
   end

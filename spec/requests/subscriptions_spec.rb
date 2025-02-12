@@ -17,21 +17,21 @@ RSpec.describe "Subscriptions", type: :request do
     it_behaves_like 'GET request examples', :get
 
     context 'with search param' do
-      let!(:subscription2) { create(:subscription, user: user, name: "Another Name") }
+      let!(:subscription2) { create(:subscription, user: user, name: "amazon_prime_video") }
 
       before do
-        get subscriptions_path, params: { search: "Another" }
+        get subscriptions_path, params: { search: "amazon" }
       end
 
       it 'returns only the subscription with the searched name' do
-        expect(response.body).to include(subscription2.name)
-        expect(response.body).not_to include(subscription.name)
+        expect(response.body).to include(subscription2.name.titleize)
+        expect(response.body).not_to include(subscription.name.titleize)
       end
 
       it 'returns all subscriptions when search param is empty' do
         get subscriptions_path, params: { search: "" }
-        expect(response.body).to include(subscription.name)
-        expect(response.body).to include(subscription2.name)
+        expect(response.body).to include(subscription.name.titleize)
+        expect(response.body).to include(subscription2.name.titleize)
       end
     end
   end
@@ -74,7 +74,7 @@ RSpec.describe "Subscriptions", type: :request do
 
   describe "PATCH /update" do
     context "with valid params" do
-      let (:updated_params) { { name: "Updated Name" } }
+      let (:updated_params) { { name: "amazon_prime_video" } }
 
       before do
         patch subscription_path(subscription), params: { subscription: updated_params }

@@ -1,4 +1,4 @@
-<%= render_card(title: subscription.name, subtitle: nil) do %>
+<%= render_card(title: formatted_subscription_name(subscription.name), subtitle: nil) do %>
   <%= render_badge(
     text: subscription.active? ? 'Active' : 'Inactive',
     bg_class: subscription.active? ? 'bg-main' : 'bg-gray-500',
