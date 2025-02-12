@@ -1,6 +1,6 @@
 module Components::UiHelper
-  def render_card(title:, subtitle:, &block)
-    render partial: "components/ui/card", locals: { title: title, subtitle: subtitle, body: capture(&block) }
+  def render_card(title:, subtitle:, **options, &block)
+    render partial: "components/ui/card", locals: { title: title, subtitle: subtitle, options: options, body: capture(&block) }
   end
 
   def render_button(text:, icon: nil, link: "#", button_type: "link_to", method: nil, data: {}, bg_class: "bg-main", **options)

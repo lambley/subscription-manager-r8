@@ -7,7 +7,7 @@ RSpec.describe Components::UiHelper, type: :helper do
       subtitle = "Test Subtitle"
       body = "Test Body"
 
-      expect(helper).to receive(:render).with(partial: 'components/ui/card', locals: { title: title, subtitle: subtitle, body: body })
+      expect(helper).to receive(:render).with(partial: 'components/ui/card', locals: { title: title, subtitle: subtitle, body: body, options: {} })
 
       helper.render_card(title: title, subtitle: subtitle) { body }
     end
@@ -16,7 +16,7 @@ RSpec.describe Components::UiHelper, type: :helper do
       title = "Test Title"
       body = "Test Body"
 
-      expect(helper).to receive(:render).with(partial: 'components/ui/card', locals: { title: title, subtitle: nil, body: body })
+      expect(helper).to receive(:render).with(partial: 'components/ui/card', locals: { title: title, subtitle: nil, body: body, options: {} })
 
       helper.render_card(title: title, subtitle: nil) { body }
     end
@@ -25,9 +25,20 @@ RSpec.describe Components::UiHelper, type: :helper do
       subtitle = "Test Subtitle"
       body = "Test Body"
 
-      expect(helper).to receive(:render).with(partial: 'components/ui/card', locals: { title: nil, subtitle: subtitle, body: body })
+      expect(helper).to receive(:render).with(partial: 'components/ui/card', locals: { title: nil, subtitle: subtitle, body: body, options: {} })
 
       helper.render_card(title: nil, subtitle: subtitle) { body }
+    end
+
+    it 'renders the card partial with options' do
+      title = "Test Title"
+      subtitle = "Test Subtitle"
+      body = "Test Body"
+      options = { class: "extra-class" }
+
+      expect(helper).to receive(:render).with(partial: 'components/ui/card', locals: { title: title, subtitle: subtitle, body: body, options: options })
+
+      helper.render_card(title: title, subtitle: subtitle, **options) { body }
     end
   end
 

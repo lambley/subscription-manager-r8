@@ -1,4 +1,6 @@
-<%= render_card(title: formatted_subscription_name(subscription.name), subtitle: nil) do %>
+<% logo_url = "https://img.logo.dev/#{Subscription.domain_for(subscription.name)}?token=#{ENV['LOGO_DEV_PUBLIC_KEY']}" %>
+
+<%= render_card(title: formatted_subscription_name(subscription.name), subtitle: nil, logo_url: logo_url) do %>
   <%= render_badge(
     text: subscription.active? ? 'Active' : 'Inactive',
     bg_class: subscription.active? ? 'bg-main' : 'bg-gray-500',
