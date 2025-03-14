@@ -86,6 +86,7 @@ GEM
     brakeman (7.0.0)
       racc
     builder (3.3.0)
+    chartkick (5.1.4)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.0)
     crass (1.0.6)
@@ -387,6 +388,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
   brakeman
+  chartkick
   database_cleaner
   debug
   dotenv-rails

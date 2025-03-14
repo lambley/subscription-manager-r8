@@ -12,6 +12,9 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "tailwindcss-rails", "~> 3.3"
 
+# Graphing and Data Visualization
+gem "chartkick"
+
 # Authentication and Security
 gem "bcrypt", "~> 3.1.7"
 

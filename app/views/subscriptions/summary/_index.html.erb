@@ -1,9 +1,13 @@
+<%= line_chart charts_budget_v_actual_path(
+  annual_budget: Current.user.budget,
+  frequency: "monthly",
+) %>
+
 <div class="relative w-full overflow-auto" data-controller="subscription">
   <%= render_collapsible do %>
     <% collapsible_preview do %>
       <h2 class="text-2xl font-semibold mb-4">Summary</h2>
     <% end %>
-
     <% collapsible_body do %>
       <%= render_subscription_summary_table(
         subscriptions: subscriptions,
@@ -11,7 +15,6 @@
         locale: Current.user.locale
       ) %>
     <% end %>
-
     <% collapsed_element do %>
       <%= render partial: 'subscriptions/summary/table_skeleton' %>
     <% end %>

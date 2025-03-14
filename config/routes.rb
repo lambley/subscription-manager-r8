@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   patch "update_budget", to: "users#update_budget"
 
   resources :subscriptions
+
+  # chart paths
+  get "charts/budget_v_actual", to: "charts#budget_v_actual"
 end
