@@ -42,6 +42,12 @@ class Subscription < ApplicationRecord
     Time.current <= expires_at
   end
 
+  def active_for_month?(month)
+    return false if started_at.nil? || expires_at.nil?
+
+    started_at <= month.end_of_month && expires_at >= month.beginning_of_month
+  end
+
   def self.subscription_names
     SUBSCRIPTION_NAMES
   end

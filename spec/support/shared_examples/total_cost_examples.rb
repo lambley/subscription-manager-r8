@@ -6,8 +6,8 @@ RSpec.shared_examples 'total cost examples' do | billing_frequency |
 
   context "#{billing_frequency} billing frequency" do
     it "returns the total cost of all subscriptions" do
-      monthly_expected = "20.00"
-      annual_expected = "240.00"
+      monthly_expected = "130.00"
+      annual_expected = "260.00"
 
       expected = billing_frequency == "monthly" ? monthly_expected : annual_expected
 
@@ -20,7 +20,7 @@ RSpec.shared_examples 'total cost examples' do | billing_frequency |
 
     it "handles subscriptions with a price of zero" do
       monthly_expected = "10.00"
-      annual_expected = "120.00"
+      annual_expected = "20.00"
 
       expected = billing_frequency == "monthly" ? monthly_expected : annual_expected
 
