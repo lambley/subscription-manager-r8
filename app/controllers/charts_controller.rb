@@ -26,7 +26,7 @@ class ChartsController < ApplicationController
 
     12.times do |i|
       month = current_month + i.months
-      month_name = month.strftime("%b")
+      month_name = month.strftime("%b '%y")
       data[0][:data][month_name] = (budget / 12).round(2)
       data[1][:data][month_name] = total_cost(subscriptions, frequency, month)
     end
