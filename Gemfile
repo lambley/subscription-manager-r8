@@ -40,7 +40,7 @@ group :development, :test do
   # Code Quality and Testing
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
-  gem "rspec-rails", "~> 7.1.0"
+  gem "rspec-rails", "~> 8.0.0"
   gem "factory_bot_rails"
   gem "simplecov", require: false
   gem "faker"
